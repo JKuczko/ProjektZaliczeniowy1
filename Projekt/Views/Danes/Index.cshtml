@@ -1,0 +1,42 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<Projekt.Models.Dane>
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Moje Treści</h1>
+
+<p>
+    <a asp-action="Create">Utwórz</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Topic)
+            </th>
+            <th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Topic)
+            </td>
+            <td>
+            <td>
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> 
+                @if (SignInManager.IsSignedIn(User))
+                {
+                          <a asp-action="Edit" asp-route-id="@item.Id">Edytuj</a>  
+                          <a asp-action="Delete" asp-route-id="@item.Id">Usuń</a>
+                        }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

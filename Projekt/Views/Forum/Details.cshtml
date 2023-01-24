@@ -1,0 +1,57 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+@model Projekt.Models.Dane
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Temat</h1>
+
+<div>
+    <hr/>
+    
+    <dl class="row">
+        <div>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Topic)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Topic)
+        </dd>
+        </div>
+        <br>
+        <div>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Content)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+        <div>
+    </dl>
+</div>
+<div>
+    <a asp-action="Index">Back to List</a>
+    |
+   <!-- <a asp-action="Index" asp-controller="Komentarzes" asp-route-id="@Model?.Id">Komentarze</a> -->
+
+
+    <form method="post" asp-action="Index" asp-controller="Komentarzes">
+        <input type="hidden" id="name" name="name" value="@Html.DisplayFor(model => model.Id)"/>
+     <input type="submit" value="Wyświetl Komentarze" />
+  </form>
+  @if (SignInManager.IsSignedIn(User))
+  {
+    <form method="post" asp-action="Create" asp-controller="Komentarzes">
+    <input type="hidden" name="topicId" value="@Html.DisplayFor(model => model.Id)"/>
+    <textarea name="Koment" value="test"></textarea>
+    <br>
+    <input type="submit" value="Dodaj Komentarz"/>
+    </form>
+  }
+ 
+           
+
+</div>

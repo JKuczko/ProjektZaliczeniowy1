@@ -1,0 +1,26 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+<div class="text-center">
+       
+       @if (SignInManager.IsSignedIn(User))
+                {
+                            <li class="nav-item">
+                                <a class="button" asp-area="" asp-controller="Danes" asp-action="Index">Moje Treści</a>
+                            </li>
+                }
+                             <li class="nav-item">
+                                <a class="button" asp-area="" asp-controller="Forum" asp-action="Index">Forum</a>
+                            </li>
+
+                         
+                                
+
+    <nav/>
+</div>
